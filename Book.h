@@ -6,21 +6,22 @@
 #define LIBRARYSORT_BOOK_H
 
 #include <string>
-#include "Node.h"
 
 using namespace std;
 
-// Book constructor
-class Book : public Book, public Node {
+class Book{
 private:
     string title;
     string author;
     string isbn;
     int qty;
 public:
-    Book(string title, string author, string isbn, int qty);
+    // Book constructor
     Book();
+    Book(string title, string author, string isbn, int qty);
     ~Book();
+
+
 
     string getTitle();
     string getAuthor();
@@ -31,7 +32,8 @@ public:
     void setTitle(string title);
     void setAuthor(string author);
     void setISBN(string isbn);
-    void setQTY(int qty);
+    void setQTY(basic_string<char> qty);
+    void sortBooks();
 
 };
 

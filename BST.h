@@ -5,24 +5,30 @@
 #ifndef LIBRARYSORT_BST_H
 #define LIBRARYSORT_BST_H
 
-
-#include "Node.h"
+#include "Book.h"
 
 class BST {
 private:
-    Node* root;
-    Node* right;
-    Node* left;
+    struct node{
+        node* left;
+        node* right;
+        Book data;
+    };
+    node* root;
+
 public:
-    Node* getRoot();
-    bool isEmpty();
-    BST();
-    ~BST();
+    // constructor and destructor
 
-    void insert(Book book);
-    Book searchBook(string title);
-    BST removeBook(Book book);
+    BST()
+    {
+       root = nullptr;
+    }
+    void search(string key);
+    void insert(Book);
+    void remove(string);
+    void changeQTY(string key, int newQty);
 
+    bool isEmpty() const;      // is true if the BST is empty.
 };
 
 

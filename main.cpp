@@ -1,18 +1,15 @@
 #include <iostream>
-#include <fstream>
-#include <set>
-#include "Node.h"
+#include "BST.h"
+#include "Book.h"
+#include "Tasks.h"
 
 using namespace std;
 
 void searchBook();
-void addBook(string title);
-void deleteBook(string title);
 void mainMenu();
 
 int main() {
     int choice =0;
-    string title, author, isbn, qty;
 
     while(choice != 5) {
 
@@ -22,28 +19,33 @@ int main() {
         if (choice == 1){
             searchBook();
         }
+        else if (choice == 2)
+        {
+
+        }
 
     }
 }
 
 void mainMenu(){
 
-    cout << "-  1  Searching for a Book        -\n";
+    cout << "-----------------------------------  \n";
+    cout << "-  1  Searching for a Book        -  \n";
     cout << "-  2  Add a new Book              -  \n";
-    cout << "-  2  Remove a Book               -  \n";
-    cout << "-  2  Calculate algorithm time    -  \n";
-    cout << "-  2  Exit the program              -  \n";
+    cout << "-  3  Remove a Book               -  \n";
+    cout << "-  4  Calculate algorithm time    -  \n";
+    cout << "-  5  Exit the program            -  \n";
+    cout << "-----------------------------------  \n";
+    cout << "- Enter your selection:  ";
 }
 
-void searchBook() {
-    string title;
-    Node Tree(0);
-    Node* root = nullptr;
-    int t;
-    cin >> t;
-    while(t--){
-        Book data;
-        cin >> data;
-        root = Tree.search(root, data);
-    }
+void searchBook()
+{
+    BST bst = Tasks::fillTree();
+    string key;
+    cout << "Enter Title of the Book : ";
+    cin.ignore();
+    getline(cin,key);
+    bst.search(key);
 }
+

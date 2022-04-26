@@ -9,7 +9,8 @@
 
 BST Tasks::fillTree()
 {
-    BST myTree;
+   /* BST bst;
+    string title, author, isbn, qty;
     ifstream file;
     file.open(R"(C:\Users\io0om\OneDrive\Desktop\Files\ProjectFiles\C++\LibrarySort\books)");
     if(!file)
@@ -22,10 +23,10 @@ BST Tasks::fillTree()
     while(getline(file, myString))
     {
         size_t field2 = 0;
-        size_t field1;
-        for(int i =0; i <= 3; i++)
+        size_t field1 = myString.find("\t");
+        for(int i =0; i <= 2; i++)
         {
-            field1= myString.find("\t", field2);
+            size_t field1 = myString.find("\t", field2);
             if (field1 != string::npos)
             {
                 string str2 = myString.substr(field2, field1-field2);
@@ -37,8 +38,9 @@ BST Tasks::fillTree()
         book->setAuthor(bookArray[1]);
         book->setISBN(bookArray[2]);
         book->setQTY(bookArray[3]);
-        myTree.insert(*book);
+        cout << book->getTitle()<<"   " << book->getAuthor()<<" " << book->getISBN()<<"   " << book->getQTY() << endl;
 
-    }
-    return myTree;
+        bst.insert(*book);
+
+    }*/
 }

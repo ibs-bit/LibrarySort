@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Book::Book(string title, string author, string isbn, int qty)
+Book::Book(string title, string author, string isbn, string qty)
 {
     this->title = title;
     this->author = author;
@@ -17,25 +17,33 @@ Book::Book(string title, string author, string isbn, int qty)
     this->qty = qty;
 
 }
+/*Book::Book(string btitle, string bauthor, string bisbn, string bqty)
+{
+    title = btitle;
+    author = bauthor;
+    isbn =bisbn;
+    qty = bqty;
+
+}*/
 Book::Book()
 {
     title = "";
     author = "";
     isbn = "";
-    qty = 0;
+    qty = "";
 
 }
 Book::~Book() {}
 
-string Book::getTitle(){return title;}
-string Book::getAuthor(){return author;}
-string Book::getISBN(){return isbn;}
-int Book::getQTY(){return qty;}
+string Book::getTitle(){return this->title;}
+string Book::getAuthor(){return this->author;}
+string Book::getISBN(){return this->isbn;}
+string Book::getQTY(){return this->qty;}
 
-void Book::setTitle(string title){title = title;}
-void Book::setAuthor(string author){author = author;}
-void Book::setISBN(string isbn){isbn = isbn;}
-void Book::setQTY(basic_string<char> qty){ qty = qty;}
+void Book::setTitle(string title){this->title = title;}
+void Book::setAuthor(string author){this->author = author;}
+void Book::setISBN(string isbn){this->isbn = isbn;}
+void Book::setQTY(string qty){ this->qty = qty;}
 
 
 
@@ -63,6 +71,7 @@ void Book::sortBooks() {
         output << n << endl;
     }
     input.close();
+    output.close();
     return;
 
 }

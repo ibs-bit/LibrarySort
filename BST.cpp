@@ -6,14 +6,18 @@
 #include <utility>
 #include "BST.h"
 
-
+BST::BST() :root(nullptr){}
 
 bool BST::isEmpty() const{
     return root == nullptr;
 }
 
+
+
 void BST::search(string key)
 {
+    string title, author, isbn;
+    int qty;
     bool found = false;
     if(isEmpty())
     {
@@ -21,15 +25,19 @@ void BST::search(string key)
         return;
     }
 
-    node* curr;
-    curr = root;
+    Node* curr = this->root;
 
     while(curr!= nullptr)
     {
         if(curr->data.getTitle() == key)
         {
             found = true;
-            curr->data.getTitle();
+            curr->data.getTitle() = title;
+            curr->data.getAuthor() = author;
+            curr->data.getISBN() = isbn;
+
+            cout << title << author << isbn << curr->data.getQTY() << endl;
+
             break;
         }
         else
@@ -49,31 +57,36 @@ void BST::search(string key)
 
 void BST::insert(Book book)
 {
-    node* n = new node;
-    node* parent;
-    n->data = std::move(book);
-    n->left  = nullptr;
-    n->right = nullptr;
-    parent = nullptr;
-
-    if(isEmpty())
-        root = n;
-    else{
-        node* curr;
-        curr = root;
-
+    // if tree is empty add the node to the root
+    if(isEmpty()) {
+        root = new Node(book);
+        cout << "new node added to root";
+    }
+    else{ // else check
+        Node* curr = root;
         while(curr)
         {
-            parent = curr;
-            if(n->data.getTitle() > curr->data.getTitle())
-                curr = curr->right;
-            else
-                curr = curr->left;
+            if (book.getTitle() < curr->data.getTitle())
+            {
+                if(curr->left = nullptr)
+                {
+                    curr ->left = new Node(book);
+                    break;
+                } else{curr = curr->left;}
+            }
+            else if(book.getTitle() > curr->data.getTitle())
+            {
+                if(curr->right == nullptr)
+                {
+                    curr->right = new Node(book);
+                    break;
+                }
+                else
+                {curr = curr->right;}
+            } else {
+                break;
+            }
         }
-        if(n->data.getTitle() < parent->data.getTitle())
-            parent->left  = n;
-        else
-            parent->right = n;
     }
 }
 
@@ -85,8 +98,8 @@ void BST::remove(string book) {
         cout << "Tree has no variables inside!\n";
         return;
     }
-    node *curr;
-    node *parent;
+    Node *curr;
+    Node *parent;
     curr = root;
 
     while (curr != nullptr) {
@@ -141,7 +154,7 @@ void BST::remove(string book) {
     // if the node has 2 children
     // we replace it with smallest value in the right-sub tree
     if (curr->left != nullptr && curr->right != nullptr) {
-        node *change;
+        Node *change;
         change = curr->right;
         if ((change->left == nullptr) && (change->right == nullptr)) {
             curr = change;
@@ -152,8 +165,8 @@ void BST::remove(string book) {
             // if the right child node has a left child traverse down left
             // until the smallest element is located
             if ((curr->right)->left != nullptr) {
-                node *lcurr;
-                node *pLcurr;
+                Node *lcurr;
+                Node *pLcurr;
                 pLcurr = curr->right;
                 lcurr = (curr->right)->left;
                 while (lcurr->left != nullptr) {
@@ -165,7 +178,7 @@ void BST::remove(string book) {
                 delete lcurr;
                 pLcurr->left = nullptr;
             } else {
-                node *tmp;
+                Node *tmp;
                 tmp = curr->right;
                 curr->data = tmp->data;
                 curr->left = tmp->right;
@@ -176,3 +189,28 @@ void BST::remove(string book) {
     }
 }
 
+void BST::inorder(Node *book)
+{
+    if (book != nullptr)
+    {
+        if(book->left) inorder(book->left);
+        cout << "" << book->data.getTitle() << "";
+        if(book->right) inorder(book->right);
+    } else return;
+}
+
+void BST::printInorder()
+{
+    if(isEmpty())
+    {
+        cout << "No data in to print";
+    } else
+        inorder(root);
+}
+
+//    Node* n;
+//    Node* parent;
+//    n->data = book;
+//    n->left  = nullptr;
+//    n->right = nullptr;
+//    parent = nullptr;

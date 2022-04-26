@@ -6,27 +6,23 @@
 #define LIBRARYSORT_BST_H
 
 #include "Book.h"
+#include "Node.h"
+
 
 class BST {
 private:
-    struct node{
-        node* left;
-        node* right;
-        Book data;
-    };
-    node* root;
-
+    Node* root;
 public:
     // constructor and destructor
 
-    BST()
-    {
-       root = nullptr;
-    }
+    BST();
+    Node* getRoot();
     void search(string key);
-    void insert(Book);
+    void insert(Book book);
     void remove(string);
     void changeQTY(string key, int newQty);
+    void inorder(Node*);
+    void printInorder();
 
     bool isEmpty() const;      // is true if the BST is empty.
 };

@@ -14,11 +14,11 @@ private:
     string title;
     string author;
     string isbn;
-    int qty;
+    string qty;
 public:
     // Book constructor
     Book();
-    Book(string title, string author, string isbn, int qty);
+    Book(string title, string author, string isbn, string qty);
     ~Book();
 
 
@@ -26,13 +26,13 @@ public:
     string getTitle();
     string getAuthor();
     string getISBN();
-    int getQTY();
+    string getQTY();
 
 
     void setTitle(string title);
     void setAuthor(string author);
     void setISBN(string isbn);
-    void setQTY(basic_string<char> qty);
+    void setQTY(string qty);
     void sortBooks();
 
 };

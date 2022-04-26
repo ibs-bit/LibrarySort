@@ -10,7 +10,7 @@
 
 class Tasks {
 public:
-    static BST fillTree();
+    BST fillTree();
 
 };
 

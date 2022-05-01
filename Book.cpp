@@ -5,11 +5,12 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <sstream>
 #include "Book.h"
 
 using namespace std;
 
-Book::Book(string title, string author, string isbn, string qty)
+Book::Book(string title, string author, string isbn, int qty)
 {
     this->title = title;
     this->author = author;
@@ -30,7 +31,7 @@ Book::Book()
     title = "";
     author = "";
     isbn = "";
-    qty = "";
+    qty = 0;
 
 }
 Book::~Book() {}
@@ -38,12 +39,12 @@ Book::~Book() {}
 string Book::getTitle(){return this->title;}
 string Book::getAuthor(){return this->author;}
 string Book::getISBN(){return this->isbn;}
-string Book::getQTY(){return this->qty;}
+int Book::getQTY(){return this->qty;}
 
 void Book::setTitle(string title){this->title = title;}
 void Book::setAuthor(string author){this->author = author;}
 void Book::setISBN(string isbn){this->isbn = isbn;}
-void Book::setQTY(string qty){ this->qty = qty;}
+void Book::setQTY(int qty){ this->qty = qty;}
 
 
 
@@ -52,8 +53,8 @@ void Book::setQTY(string qty){ this->qty = qty;}
 // function to sort the books in an ascending order
 void Book::sortBooks() {
 
-    ifstream input(R"(C:\Users\io0om\OneDrive\Desktop\Files\ProjectFiles\C++\LibrarySort\books)");
-    ofstream output(R"(C:\Users\io0om\OneDrive\Desktop\Files\ProjectFiles\C++\LibrarySort\sortedBooks)");
+    ifstream input("books");
+    ofstream output("sortedBooks", ios::out|ios::app);
 
     if (!input.is_open()) {
         cout << "Error opening file" << endl;
@@ -62,17 +63,21 @@ void Book::sortBooks() {
 
     set <string> sortedBooks;
     string book;
+    istringstream iss(book);
 
     while (getline(input, book)) {
-        sortedBooks.insert(book);
+        sortedBooks.insert(book+"\t");
     }
-    for (const auto &n: sortedBooks) {
-        cout << n << endl;
-        output << n << endl;
+    for (const auto &n: sortedBooks)
+    {
+        cout << "----------------------------------------------------------------------------------------------------\n";
+        cout << "    title          |               author(s)                |          isbn         |        qty     \n";
+        cout << "----------------------------------------------------------------------------------------------------\n";
+        cout <<" "<< n << endl;
+       // output << n << endl;
     }
     input.close();
     output.close();
-    return;
 
 }
 

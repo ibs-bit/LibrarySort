@@ -8,23 +8,17 @@
 
 #include "Book.h"
 
-class Node {
+struct Node {
 public:
-    Node(Book book, Node* right = nullptr, Node* left = nullptr);
-
+    Node* next;
     Book data;
-    Node* left;
-    Node* right;
 
-
+    // constructor and getters
+    Node(Book book, Node* next);
+    Book getData();
+    Node* getNext();
+    void setNext(Node* next);
 
 };
-
-/* Node* getRight();
- Node* getLeft();
-
- void setRight(Node* right);
- void setLeft(Node* left);
-*/
 
 #endif //LIBRARYSORT_NODE_H

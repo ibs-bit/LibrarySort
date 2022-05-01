@@ -4,13 +4,18 @@
 
 #include "Node.h"
 
-Node::Node(Book book, Node* right, Node* left)
-:data(book),right(right),left(left)
+
+// constructor and setter and getter declarations
+
+
+Node::Node(Book book, Node* next)
 {
+    this->data = book;
+    this->next = next;
 }
 
-/*Node* Node::getLeft() {return this->left;}
-Node* Node::getRight() { return this->right;}
+Book Node::getData() {return this->data;}
+Node* Node::getNext() {return this->next;}
 
-void Node::setRight(Node* right) { this->right = right;}
-void Node::setLeft(Node *left) {this->left = left;}*/
+void Node::setNext(Node* next) { this->next = next;}
+

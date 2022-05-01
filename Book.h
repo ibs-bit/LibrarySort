@@ -7,33 +7,36 @@
 
 #include <string>
 
-using namespace std;
 
-class Book{
+
+struct Book{
 private:
-    string title;
-    string author;
-    string isbn;
-    string qty;
+    // member variables for the Book object.
+    std::string title;
+    std::string author;
+    std::string isbn;
+    int qty;
 public:
-    // Book constructor
+    // Book constructor and destructor
     Book();
-    Book(string title, string author, string isbn, string qty);
+    Book(std::string title, std::string author, std::string isbn, int qty);
     ~Book();
 
 
+    // getters and setters
+    std::string getTitle();
+    std::string getAuthor();
+    std::string getISBN();
+    int getQTY();
 
-    string getTitle();
-    string getAuthor();
-    string getISBN();
-    string getQTY();
 
+    void setTitle(std::string title);
+    void setAuthor(std::string author);
+    void setISBN(std::string isbn);
+    void setQTY(int qty);
 
-    void setTitle(string title);
-    void setAuthor(string author);
-    void setISBN(string isbn);
-    void setQTY(string qty);
-    void sortBooks();
+    // sort books file in alphabetical order
+    static void sortBooks();
 
 };
 

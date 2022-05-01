@@ -1,27 +1,27 @@
 CXX = g++
 CXXFLAGS = -g -Wall -Wextra
 
-.PHONY : test
+.PHONY : main
 
-main: LibrarySort
+main: Test.exe
 
 
-LibrarySort : main.cpp Tasks.o LinkedList.o Node.o Book.o
+Test.exe : TestCases.cpp Tasks.o LinkedList.o Node.o Book.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-Tasks.o : Tasks.cpp Tasks.h LinkedList.o Node.o Book.o
+Tasks.o : ../Tasks.cpp ../Tasks.h LinkedList.o Node.o Book.o
 	$(CXX) $(CXXFLAGS) -c $^
 
-LinkedList.o : LinkedList.cpp LinkedList.h Node.o Book.o
+LinkedList.o : ../LinkedList.cpp ../LinkedList.h Node.o Book.o
 	$(CXX) $(CXXFLAGS) -c $^
 
-Node.o : Node.cpp Node.h Book.o
+Node.o : ../Node.cpp ../Node.h Book.o
 	$(CXX) $(CXXFLAGS) -c $^
 
-Book.o : Book.cpp Book.h
+Book.o : ../Book.cpp ../Book.h
 	$(CXX) $(CXXFLAGS) -c $<
 
 
-.PHONY : cleanTest
-cleanTest :
-	rm *.o *.h.gch TestCases.exe
+.PHONY : clean
+clean:
+	rm *.o Test.exe

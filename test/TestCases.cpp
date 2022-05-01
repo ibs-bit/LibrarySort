@@ -5,48 +5,83 @@
 
 #define CATCH_CONFIG_MAIN
 
-#include "../Items.h"
+#include "../Tasks.h"
 #include "catch.hpp"
 
+Tasks task;
+// Load library data to List
+LinkedList list;
 
-// test case to retrieve items based on id.
-TEST_CASE("retrieve items, [getItems()]"){
-    Items* i;
-    int id=1;
-    vector<string> itemsVector = i->getItems(id);
+Book book1;
 
-    REQUIRE(itemsVector[2] == "Treats");
+// test case to load data books file data to Linked List
+TEST_CASE("Load data to Linked List", "[loadData()]"){
+
+    // load data and require that the first book has at least 1 copy.
+    list = task.loadData();
+
+    REQUIRE(list.getHead()->getData().getQTY() > 0);
+
 
 }
 
 
-//  test case to restock item, the new qty should be the sum of the old qty and the additional qty.
-TEST_CASE("increase qty of items, [restockItem(), increaseQTY()]"){
-    Items* i;
-    int id = 1;
-    int newqty = 1;
-    vector<string> oldItems = i->getItems(id);
-    i->restockItem(id,newqty);
-    vector<string> itemsVector = i->getItems(id);
-    int oldqty = stoi(oldItems[6]);
+//  test case to search for a Book
+TEST_CASE("search for book by title", "[searchBook(), searchTitle()]"){
 
-    // new qty should be
-    REQUIRE(stoi(itemsVector[6]) == (oldqty+newqty));
+    // book  at the near head of the list
+    std::string title = "Recursive Algorithms";
+    list = task.loadData();
+    book1 = list.searchBook(title);
+    // search book that is in the middle of the list
+    std::string title2 = "Linear Programming and Economic Analysis";
+    Book book2 = list.searchBook(title2);
+
+
+    // search book the tail of the list
+    std::string title3  = "Graph Databases";
+    Book book3 = list.searchBook(title3);
+
+    // the retrieved book object's title should identical to the given title.
+    REQUIRE(book1.getTitle() == title);
+    REQUIRE(book2.getTitle() == title2);
+    REQUIRE(book3.getTitle() == title3);
+
 
 }
 
 
-// test case to sell items.
-// items must have 0.0 initial sales to pass this test
-TEST_CASE("selling items, [itemSell()]"){
-    Items* i;
-    int id = 1;
-    int sold = 1;
-    vector<string> oldVector = i->getItems(id);
-    Items::itemSell(id,sold);
-    vector<string> itemsVector = i->getItems(id);
+// test case to adding a Book to database.
+TEST_CASE("Add new Book" , "[addBook(list)]")
+{
+    // create a new book and insert it to the List
+    Book book = Book("TestCase Book","John Doe", "3877762123",1);
+    list.addtoList(book);
+    // get the most last inserted item in the list to a Book node
+    // and compare it to the new Book values.
+    Node* curr = list.getTail();
+    std::string nTitle = curr->getData().getTitle();
+    std::string nauthor = curr->getData().getAuthor();
+    std::string nisbn = curr->getData().getISBN();
+    int nqty = curr->getData().getQTY();
 
-    REQUIRE(stof(itemsVector[7]) == (stof(oldVector[3])));
+    // they should have the same values
+    REQUIRE(book.getTitle() == nTitle);
+    REQUIRE(book.getAuthor() == nauthor);
+    REQUIRE(book.getISBN()==nisbn);
+    REQUIRE(book.getQTY()== nqty);
 
+}
+
+
+TEST_CASE("removing a book" ,"removeBook(title)" )
+{
+    // remove the head of the list,
+    list = task.loadData();
+    Node* head = list.getHead();
+    std::string title = head->getData().getTitle();
+    list.removeBook(title);
+    // and require that previous head node's title
+    REQUIRE(head->getData().getTitle()!= title);
 }
 
